@@ -28,7 +28,13 @@
    bun -v
    ```
 
-3. To run just do the following:
+3. Install:
+
+   ```bash
+   bun install
+   ```
+
+4. To run just do the following:
 
    ```bash
    bun run src/index.ts
