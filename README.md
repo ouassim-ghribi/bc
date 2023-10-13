@@ -22,7 +22,11 @@
    bun -v
    ```
 
-3. Then
+3. To run just do the following:
+
+   ```bash
+   bun run src/index.ts
+   ```
 
 ### Folder structure
 
@@ -37,12 +41,6 @@
     ├── .gitignore
     ├── package.json
     └── tsconfig.json
-
-4. To run just do the following:
-
-   ```bash
-   bun run src/index.ts
-   ```
 
 ### References:
 
