@@ -1,5 +1,11 @@
 # Merkel-Tree
 
+## Table of contents
+
+1. [Setup](#setup)
+2. [Folder structure](#folder-structure)
+3. [References](#references)
+
 ### Setup
 
 1. First clone the repository:
