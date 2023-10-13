@@ -1,4 +1,4 @@
-# Merkel-Tree
+# Merkle-Tree
 
 ## Table of contents
 
