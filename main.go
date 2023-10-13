@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/strlrd-29/bc/mrkl"
+	"github.com/ouassim-ghribi/bc/mrkl"
 )
 
 func main() {
