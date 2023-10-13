@@ -22,6 +22,10 @@ func NewNode(data []byte) *MerkleNode {
 	return &MerkleNode{Left: nil, Right: nil, Hash: CalculateHash(data)}
 }
 
+func NewNodeH(data []byte) *MerkleNode {
+	return &MerkleNode{Left: nil, Right: nil, Hash: data}
+}
+
 // buildTree constructs the Merkle Tree from a list of data.
 func BuildTree(dataList [][]byte) *MerkleNode {
 	if len(dataList) == 0 {
@@ -37,6 +41,48 @@ func BuildTree(dataList [][]byte) *MerkleNode {
 	// Create leaf nodes from the data.
 	for _, data := range dataList {
 		nodes = append(nodes, NewNode(data))
+	}
+
+	// Recursively build the tree by pairing and hashing nodes.
+	for len(nodes) > 1 {
+		var newNodes []*MerkleNode
+
+		// Check if the length is odd and duplicate the last element.
+		if len(nodes)%2 != 0 {
+			nodes = append(nodes, nodes[len(nodes)-1])
+		}
+
+		for i := 0; i < len(nodes); i += 2 {
+			left := nodes[i]
+			right := nodes[i+1]
+
+			hashData := append(left.Hash, right.Hash...)
+			combinedHash := CalculateHash(hashData)
+
+			newNode := &MerkleNode{Left: left, Right: right, Hash: combinedHash}
+			newNodes = append(newNodes, newNode)
+		}
+		nodes = newNodes
+	}
+
+	return nodes[0] // Return the root node.
+
+}
+
+func BuildTreeH(txs []Transaction) *MerkleNode {
+	if len(txs) == 0 {
+		return nil
+	}
+
+	if len(txs) == 1 {
+		return NewNodeH([]byte(txs[0].Hash))
+	}
+
+	var nodes []*MerkleNode
+
+	// Create leaf nodes from the data.
+	for _, data := range txs {
+		nodes = append(nodes, NewNodeH([]byte(data.Hash)))
 	}
 
 	// Recursively build the tree by pairing and hashing nodes.

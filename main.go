@@ -8,16 +8,11 @@ import (
 
 func main() {
 
-	txs := mrkl.ReadJSON("tx.json")
+	// txs := mrkl.ReadJSON("tx.json")
 
-	// blockHash := mrkl.GetLatestBlock()
+	_, txs := mrkl.GetMerkleRootAndTransactions()
 
-	// MrklRoot, Tx := mrkl.GetMerkleRootAndTransactions(blockHash)
-
-	// fmt.Println(MrklRoot)
-	// fmt.Println(Tx)
-
-	root := mrkl.BuildTree(txs)
+	root := mrkl.BuildTreeH(txs)
 
 	fmt.Println("Merkle Tree:")
 	mrkl.PrintMerkleTree(root, "", false, true)
