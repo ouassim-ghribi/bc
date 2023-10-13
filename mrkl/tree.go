@@ -1,7 +1,6 @@
 package mrkl
 
 import (
-	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -20,12 +19,7 @@ type Transactions struct {
 }
 
 func NewNode(data []byte) *MerkleNode {
-	return &MerkleNode{Left: nil, Right: nil, Hash: calculateHash(data)}
-}
-
-func calculateHash(data []byte) []byte {
-	hash := sha256.Sum256(data)
-	return hash[:]
+	return &MerkleNode{Left: nil, Right: nil, Hash: CalculateHash(data)}
 }
 
 // buildTree constructs the Merkle Tree from a list of data.
@@ -59,7 +53,7 @@ func BuildTree(dataList [][]byte) *MerkleNode {
 			right := nodes[i+1]
 
 			hashData := append(left.Hash, right.Hash...)
-			combinedHash := calculateHash(hashData)
+			combinedHash := CalculateHash(hashData)
 
 			newNode := &MerkleNode{Left: left, Right: right, Hash: combinedHash}
 			newNodes = append(newNodes, newNode)
